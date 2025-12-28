@@ -26,6 +26,11 @@ This documentation suite is the **single source of truth** for BlackRoad.io. Any
 | 08 | [Deployment](./08-DEPLOYMENT.md) | How to deploy each service | DevOps, releases |
 | 09 | [Roadmap](./09-ROADMAP.md) | Phased timeline with milestones | Planning, prioritization |
 | 10 | [Glossary](./10-GLOSSARY.md) | Terms and definitions | Avoiding confusion |
+| 11 | [Ecosystem](./11-ECOSYSTEM.md) | Complete BlackRoad universe, layers, economics | Understanding the big picture |
+| 12 | [RoadChain](./12-ROADCHAIN.md) | Ledger protocol, PS-SHA∞, Stripe integration | Building economic features |
+| 13 | [RoadCoin](./13-ROADCOIN.md) | Credit economics, pricing, creator payouts | Understanding monetization |
+| 14 | [Corporate](./14-CORPORATE.md) | Legal structure, Stripe config, trademarks | Business operations |
+| 15 | [Agents](./15-AGENTS.md) | Agent identity, memory, trinary logic | Building agent features |
 
 ---
 
