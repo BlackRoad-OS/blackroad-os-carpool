@@ -50,3 +50,23 @@ htmlcov/
 *.pem
 *.key
 credentials.json
+
+# Corporate documents - NEVER commit!
+/corporate/
+corporate/
+
+# Attorney-client privileged
+/legal/
+legal/
+
+# Financial records
+/accounting/
+accounting/
+/tax/
+tax/
+
+# Personal information - CRITICAL
+*EIN*
+*SSN*
+*Tax*
+*Stock Certificate*
