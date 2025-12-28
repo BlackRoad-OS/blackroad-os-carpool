@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[BRAND_NAME] — [PAGE_TITLE]</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --amber: #F5A623;
+            --orange: #F26522;
+            --hot-pink: #FF1D6C;
+            --magenta: #E91E63;
+            --electric-blue: #2979FF;
+            --sky-blue: #448AFF;
+            --violet: #9C27B0;
+            --deep-purple: #5E35B1;
+            
+            --gradient-brand: linear-gradient(135deg, var(--amber) 0%, var(--hot-pink) 38.2%, var(--violet) 61.8%, var(--electric-blue) 100%);
+            
+            --phi: 1.618;
+            --space-xs: 8px;
+            --space-sm: 13px;
+            --space-md: 21px;
+            --space-lg: 34px;
+            --space-xl: 55px;
+            --space-2xl: 89px;
+            
+            --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.618;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-md) var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav-logo-mark {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-logo-mark .road-dashes {
+            animation: dashes-spin 8s linear infinite;
+            transform-origin: 50px 50px;
+        }
+
+        @keyframes dashes-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-logo-text {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* ========== ERROR PAGE ========== */
+        .error-page {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--space-2xl);
+        }
+
+        /* Background Effects */
+        .error-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 55px 55px;
+            animation: grid-move 30s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(55px, 55px); }
+        }
+
+        .error-orbs {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .error-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+        }
+
+        .error-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--hot-pink);
+            top: 10%;
+            left: 10%;
+            animation: orb-float-1 12s ease-in-out infinite;
+        }
+
+        .error-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--electric-blue);
+            bottom: 20%;
+            right: 15%;
+            animation: orb-float-2 10s ease-in-out infinite;
+        }
+
+        .error-orb-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--violet);
+            top: 40%;
+            right: 30%;
+            animation: orb-float-3 8s ease-in-out infinite;
+        }
+
+        @keyframes orb-float-1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+        }
+
+        @keyframes orb-float-2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-40px, -50px) scale(1.15); }
+        }
+
+        @keyframes orb-float-3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 40px) scale(0.9); }
+        }
+
+        /* Content */
+        .error-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Animated 404 */
+        .error-code {
+            font-size: clamp(120px, 25vw, 280px);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+
+        .error-code-text {
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 5s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .error-code-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glitch 3s infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); opacity: 0; }
+            92% { transform: translate(-5px, 2px); opacity: 0.5; }
+            94% { transform: translate(5px, -2px); opacity: 0.5; }
+            96% { transform: translate(-3px, -1px); opacity: 0.5; }
+            98% { transform: translate(3px, 1px); opacity: 0.5; }
+        }
+
+        /* Animated Eye */
+        .error-eye {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto var(--space-xl);
+            position: relative;
+        }
+
+        .error-eye svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .error-eye .eye-lid {
+            animation: blink 4s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+
+        .error-eye .eye-pupil {
+            animation: pupil-look 5s ease-in-out infinite;
+        }
+
+        @keyframes pupil-look {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-5px, -3px); }
+            40% { transform: translate(5px, 2px); }
+            60% { transform: translate(-3px, 4px); }
+            80% { transform: translate(4px, -4px); }
+        }
+
+        .error-title {
+            font-size: clamp(24px, 4vw, 40px);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .error-description {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 450px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.7;
+        }
+
+        /* Buttons */
+        .error-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .error-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--gradient-brand);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: var(--space-xs);
+            transition: all 0.3s var(--ease);
+        }
+
+        .error-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 29, 108, 0.3);
+        }
+
+        .error-btn-primary svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .error-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: transparent;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: var(--space-xs);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s var(--ease);
+        }
+
+        .error-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--hot-pink);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation: float-particle 8s ease-in-out infinite; }
+        .particle:nth-child(2) { left: 20%; top: 80%; animation: float-particle 10s ease-in-out infinite 1s; background: var(--amber); }
+        .particle:nth-child(3) { left: 30%; top: 40%; animation: float-particle 7s ease-in-out infinite 2s; background: var(--electric-blue); }
+        .particle:nth-child(4) { left: 70%; top: 30%; animation: float-particle 9s ease-in-out infinite 0.5s; }
+        .particle:nth-child(5) { left: 80%; top: 70%; animation: float-particle 11s ease-in-out infinite 1.5s; background: var(--violet); }
+        .particle:nth-child(6) { left: 90%; top: 50%; animation: float-particle 8s ease-in-out infinite 2.5s; background: var(--amber); }
+        .particle:nth-child(7) { left: 50%; top: 10%; animation: float-particle 9s ease-in-out infinite 3s; background: var(--electric-blue); }
+        .particle:nth-child(8) { left: 60%; top: 90%; animation: float-particle 10s ease-in-out infinite 0.8s; }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+            50% { transform: translateY(-30px) translateX(15px); opacity: 0.8; }
+        }
+
+        /* Suggestions */
+        .error-suggestions {
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .suggestions-title {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: var(--space-md);
+        }
+
+        .suggestions-links {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: color 0.2s var(--ease);
+        }
+
+        .suggestion-link:hover {
+            color: var(--hot-pink);
+        }
+
+        .suggestion-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            nav {
+                padding: var(--space-sm) var(--space-md);
+            }
+
+            .error-page {
+                padding: var(--space-xl) var(--space-lg);
+            }
+
+            .error-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .suggestions-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-mark">
+                <svg viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="44" stroke="#FF1D6C" stroke-width="6"/>
+                    <g class="road-dashes">
+                        <rect x="47" y="4" width="6" height="12" fill="#000" rx="2"/>
+                        <rect x="47" y="84" width="6" height="12" fill="#000" rx="2"/>
+                        <rect x="84" y="47" width="12" height="6" fill="#000" rx="2"/>
+                        <rect x="4" y="47" width="12" height="6" fill="#000" rx="2"/>
+                    </g>
+                    <path d="M50 10C27.9 10 10 27.9 10 50H90C90 27.9 72.1 10 50 10Z" fill="#F5A623"/>
+                    <path d="M10 50C10 72.1 27.9 90 50 90C72.1 90 90 72.1 90 50H10Z" fill="#2979FF"/>
+                    <circle cx="50" cy="50" r="14" fill="#000"/>
+                </svg>
+            </div>
+            <span class="nav-logo-text">[BRAND_NAME]</span>
+        </a>
+    </nav>
+
+    <!-- Error Page -->
+    <main class="error-page">
+        <div class="error-grid"></div>
+        
+        <div class="error-orbs">
+            <div class="error-orb error-orb-1"></div>
+            <div class="error-orb error-orb-2"></div>
+            <div class="error-orb error-orb-3"></div>
+        </div>
+
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <div class="error-content">
+            <!-- Animated Eye -->
+            <div class="error-eye">
+                <svg viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="45" fill="#111"/>
+                    <circle cx="50" cy="50" r="40" fill="#1a1a1a"/>
+                    <g class="eye-lid">
+                        <path d="M10 50C10 50 30 25 50 25C70 25 90 50 90 50" stroke="#F5A623" stroke-width="4" fill="none"/>
+                        <path d="M10 50C10 50 30 75 50 75C70 75 90 50 90 50" stroke="#2979FF" stroke-width="4" fill="none"/>
+                    </g>
+                    <circle cx="50" cy="50" r="20" fill="#FF1D6C" opacity="0.3"/>
+                    <circle cx="50" cy="50" r="12" fill="#FF1D6C" class="eye-pupil"/>
+                    <circle cx="54" cy="46" r="4" fill="#fff" opacity="0.8"/>
+                </svg>
+            </div>
+
+            <!-- Error Code -->
+            <div class="error-code">
+                <span class="error-code-text">[ERROR_CODE]</span>
+                <span class="error-code-glitch">[ERROR_CODE]</span>
+            </div>
+
+            <h1 class="error-title">[ERROR_TITLE]</h1>
+            <p class="error-description">[ERROR_DESCRIPTION]</p>
+
+            <div class="error-buttons">
+                <a href="#" class="error-btn-primary">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    [BTN_PRIMARY]
+                </a>
+                <a href="#" class="error-btn-secondary">[BTN_SECONDARY]</a>
+            </div>
+
+            <div class="error-suggestions">
+                <p class="suggestions-title">[SUGGESTIONS_TITLE]</p>
+                <div class="suggestions-links">
+                    <a href="#" class="suggestion-link">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        [SUGGESTION_1]
+                    </a>
+                    <a href="#" class="suggestion-link">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        [SUGGESTION_2]
+                    </a>
+                    <a href="#" class="suggestion-link">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        [SUGGESTION_3]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

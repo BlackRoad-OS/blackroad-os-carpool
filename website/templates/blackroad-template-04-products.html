@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[BRAND_NAME] — [PAGE_TITLE]</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --amber: #F5A623;
+            --orange: #F26522;
+            --hot-pink: #FF1D6C;
+            --magenta: #E91E63;
+            --electric-blue: #2979FF;
+            --sky-blue: #448AFF;
+            --violet: #9C27B0;
+            --deep-purple: #5E35B1;
+            
+            --gradient-brand: linear-gradient(135deg, var(--amber) 0%, var(--hot-pink) 38.2%, var(--violet) 61.8%, var(--electric-blue) 100%);
+            
+            --phi: 1.618;
+            --space-xs: 8px;
+            --space-sm: 13px;
+            --space-md: 21px;
+            --space-lg: 34px;
+            --space-xl: 55px;
+            --space-2xl: 89px;
+            --space-3xl: 144px;
+            
+            --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.618;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-md) var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav-logo-mark {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-logo-mark .road-dashes {
+            animation: dashes-spin 8s linear infinite;
+            transform-origin: 50px 50px;
+        }
+
+        @keyframes dashes-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-logo-text {
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s var(--ease);
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-cta {
+            background: var(--white);
+            color: var(--black);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s var(--ease);
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* ========== SCROLL PROGRESS ========== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--gradient-brand);
+            z-index: 9999;
+            width: 0%;
+        }
+
+        /* ========== PAGE HERO ========== */
+        .page-hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--space-3xl) var(--space-xl);
+            padding-top: calc(var(--space-3xl) + 60px);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 55px 55px;
+            animation: grid-move 20s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(55px, 55px); }
+        }
+
+        .hero-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            background: var(--gradient-brand);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orb-pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes orb-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.25; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        .hero-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 10vw, 89px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: var(--space-md);
+        }
+
+        .hero-title .gradient {
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 21px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            padding: var(--space-3xl) var(--space-2xl);
+            background: var(--black);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--space-2xl);
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-sm);
+            display: inline-block;
+        }
+
+        .section-title {
+            font-size: clamp(34px, 5vw, 55px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-desc {
+            font-size: 17px;
+            opacity: 0.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== FEATURED PRODUCT ========== */
+        .featured-product {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-visual {
+            position: relative;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .featured-shape {
+            width: 80%;
+            height: 80%;
+            background: var(--gradient-brand);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: blob-morph 12s ease-in-out infinite;
+            filter: drop-shadow(0 30px 60px rgba(255, 29, 108, 0.4));
+            position: relative;
+        }
+
+        @keyframes blob-morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            17% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            33% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+            67% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+            83% { border-radius: 40% 60% 50% 40% / 60% 50% 40% 60%; }
+        }
+
+        .featured-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 89px;
+            animation: emoji-float 3s ease-in-out infinite;
+        }
+
+        @keyframes emoji-float {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-15px); }
+        }
+
+        .featured-rings {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .featured-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 29, 108, 0.2);
+            animation: ring-pulse 4s ease-out infinite;
+        }
+
+        .featured-ring:nth-child(1) { width: 90%; height: 90%; animation-delay: 0s; }
+        .featured-ring:nth-child(2) { width: 110%; height: 110%; animation-delay: 1s; }
+        .featured-ring:nth-child(3) { width: 130%; height: 130%; animation-delay: 2s; }
+
+        @keyframes ring-pulse {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .featured-content {
+            max-width: 500px;
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            background: rgba(255, 29, 108, 0.1);
+            border: 1px solid rgba(255, 29, 108, 0.2);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--hot-pink);
+            margin-bottom: var(--space-md);
+        }
+
+        .featured-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--hot-pink);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .featured-title {
+            font-size: clamp(34px, 4vw, 55px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+        }
+
+        .featured-description {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: var(--space-lg);
+            line-height: 1.7;
+        }
+
+        .featured-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .featured-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .featured-feature::before {
+            content: '✓';
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 29, 108, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--hot-pink);
+            flex-shrink: 0;
+        }
+
+        .featured-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--gradient-brand);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: var(--space-xs);
+            transition: all 0.3s var(--ease);
+        }
+
+        .featured-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 29, 108, 0.3);
+        }
+
+        .featured-cta svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .featured-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ========== PRODUCTS GRID ========== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--space-md);
+            padding: var(--space-xl);
+            transition: all 0.5s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-brand);
+            opacity: 0;
+            transition: opacity 0.3s var(--ease);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--space-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            margin-bottom: var(--space-lg);
+            transition: all 0.3s var(--ease);
+        }
+
+        .product-card:hover .product-icon {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .product-name {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .product-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: var(--space-lg);
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: var(--space-md);
+        }
+
+        .product-price span {
+            font-size: 34px;
+            font-weight: 600;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .product-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s var(--ease);
+        }
+
+        .product-link svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .product-link:hover {
+            color: var(--hot-pink);
+        }
+
+        .product-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ========== USE CASES ========== */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-case-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--space-sm);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: all 0.4s var(--ease);
+        }
+
+        .use-case-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-5px);
+        }
+
+        .use-case-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-md);
+            display: block;
+        }
+
+        .use-case-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .use-case-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========== COMPARISON TABLE ========== */
+        .comparison-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .comparison-table th {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .comparison-table th:first-child {
+            border-radius: var(--space-xs) 0 0 0;
+        }
+
+        .comparison-table th:last-child {
+            border-radius: 0 var(--space-xs) 0 0;
+        }
+
+        .comparison-table td {
+            font-size: 15px;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .comparison-table .feature-name {
+            font-weight: 500;
+        }
+
+        .comparison-table .check {
+            color: var(--hot-pink);
+            font-size: 18px;
+        }
+
+        .comparison-table .dash {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .comparison-table .highlight {
+            background: rgba(255, 29, 108, 0.05);
+        }
+
+        /* ========== INTEGRATION LOGOS ========== */
+        .integrations-section {
+            text-align: center;
+        }
+
+        .integrations-marquee {
+            display: flex;
+            gap: var(--space-2xl);
+            animation: marquee 40s linear infinite;
+            padding: var(--space-xl) 0;
+        }
+
+        .integrations-marquee-inner {
+            display: flex;
+            gap: var(--space-2xl);
+            flex-shrink: 0;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .integration-logo {
+            width: 120px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--space-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 500;
+            flex-shrink: 0;
+            transition: all 0.3s var(--ease);
+        }
+
+        .integration-logo:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ========== TESTIMONIAL ========== */
+        .testimonial-section {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(24px, 3vw, 34px);
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: var(--space-xl);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            display: block;
+            font-size: 89px;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: var(--space-md);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .testimonial-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--gradient-brand);
+            padding: 2px;
+        }
+
+        .testimonial-avatar-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .testimonial-info {
+            text-align: left;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .testimonial-role {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-orb {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--hot-pink) 0%, transparent 70%);
+            filter: blur(100px);
+            opacity: 0.2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-title {
+            font-size: clamp(34px, 5vw, 55px);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-description {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 500px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: var(--space-xs);
+            transition: all 0.3s var(--ease);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: transparent;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: var(--space-xs);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s var(--ease);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--black);
+            padding: var(--space-2xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .footer-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .footer-logo .road-dashes {
+            animation: dashes-spin 8s linear infinite;
+            transform-origin: 50px 50px;
+        }
+
+        footer p {
+            font-size: 13px;
+            opacity: 0.3;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .use-cases-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-product {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .featured-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: var(--space-sm) var(--space-md);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: var(--space-2xl) var(--space-lg);
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-container {
+                margin: 0 calc(-1 * var(--space-lg));
+                padding: 0 var(--space-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-mark">
+                <svg viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="44" stroke="#FF1D6C" stroke-width="6"/>
+                    <g class="road-dashes">
+                        <rect x="47" y="4" width="6" height="12" fill="#000" rx="2"/>
+                        <rect x="47" y="84" width="6" height="12" fill="#000" rx="2"/>
+                        <rect x="84" y="47" width="12" height="6" fill="#000" rx="2"/>
+                        <rect x="4" y="47" width="12" height="6" fill="#000" rx="2"/>
+                        <rect x="75" y="18" width="6" height="10" fill="#000" rx="2" transform="rotate(45 78 23)"/>
+                        <rect x="19" y="72" width="6" height="10" fill="#000" rx="2" transform="rotate(45 22 77)"/>
+                        <rect x="72" y="72" width="6" height="10" fill="#000" rx="2" transform="rotate(-45 75 77)"/>
+                        <rect x="22" y="18" width="6" height="10" fill="#000" rx="2" transform="rotate(-45 25 23)"/>
+                    </g>
+                    <path d="M50 10C27.9 10 10 27.9 10 50H90C90 27.9 72.1 10 50 10Z" fill="#F5A623"/>
+                    <path d="M10 50C10 72.1 27.9 90 50 90C72.1 90 90 72.1 90 50H10Z" fill="#2979FF"/>
+                    <circle cx="50" cy="50" r="14" fill="#000"/>
+                </svg>
+            </div>
+            <span class="nav-logo-text">[BRAND_NAME]</span>
+        </a>
+        <div class="nav-links">
+            <a href="#">[NAV_LINK_1]</a>
+            <a href="#">[NAV_LINK_2]</a>
+            <a href="#">[NAV_LINK_3]</a>
+            <a href="#">[NAV_LINK_4]</a>
+            <a href="#" class="nav-cta">[NAV_CTA]</a>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-grid"></div>
+        <div class="hero-orb"></div>
+        <div class="hero-content">
+            <span class="hero-label">[HERO_LABEL]</span>
+            <h1 class="hero-title">[HERO_TITLE_PLAIN] <span class="gradient">[HERO_TITLE_GRADIENT]</span></h1>
+            <p class="hero-description">[HERO_DESCRIPTION]</p>
+        </div>
+    </section>
+
+    <!-- Featured Product -->
+    <section>
+        <div class="featured-product">
+            <div class="featured-visual">
+                <div class="featured-rings">
+                    <div class="featured-ring"></div>
+                    <div class="featured-ring"></div>
+                    <div class="featured-ring"></div>
+                </div>
+                <div class="featured-shape">
+                    <span class="featured-icon">[FEATURED_ICON]</span>
+                </div>
+            </div>
+            <div class="featured-content">
+                <div class="featured-badge">[FEATURED_BADGE]</div>
+                <h2 class="featured-title">[FEATURED_TITLE]</h2>
+                <p class="featured-description">[FEATURED_DESCRIPTION]</p>
+                <div class="featured-features">
+                    <div class="featured-feature">[FEATURED_FEATURE_1]</div>
+                    <div class="featured-feature">[FEATURED_FEATURE_2]</div>
+                    <div class="featured-feature">[FEATURED_FEATURE_3]</div>
+                    <div class="featured-feature">[FEATURED_FEATURE_4]</div>
+                </div>
+                <a href="#" class="featured-cta">
+                    [FEATURED_CTA]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section>
+        <div class="section-header">
+            <span class="section-label">[PRODUCTS_LABEL]</span>
+            <h2 class="section-title">[PRODUCTS_TITLE]</h2>
+            <p class="section-desc">[PRODUCTS_DESCRIPTION]</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-icon">[PRODUCT_1_ICON]</div>
+                <h3 class="product-name">[PRODUCT_1_NAME]</h3>
+                <p class="product-description">[PRODUCT_1_DESCRIPTION]</p>
+                <p class="product-price">[PRODUCT_1_PRICE_LABEL] <span>[PRODUCT_1_PRICE]</span>[PRODUCT_1_PRICE_PERIOD]</p>
+                <a href="#" class="product-link">
+                    [PRODUCT_LINK_TEXT]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-icon">[PRODUCT_2_ICON]</div>
+                <h3 class="product-name">[PRODUCT_2_NAME]</h3>
+                <p class="product-description">[PRODUCT_2_DESCRIPTION]</p>
+                <p class="product-price">[PRODUCT_2_PRICE_LABEL] <span>[PRODUCT_2_PRICE]</span>[PRODUCT_2_PRICE_PERIOD]</p>
+                <a href="#" class="product-link">
+                    [PRODUCT_LINK_TEXT]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-icon">[PRODUCT_3_ICON]</div>
+                <h3 class="product-name">[PRODUCT_3_NAME]</h3>
+                <p class="product-description">[PRODUCT_3_DESCRIPTION]</p>
+                <p class="product-price">[PRODUCT_3_PRICE_LABEL] <span>[PRODUCT_3_PRICE]</span>[PRODUCT_3_PRICE_PERIOD]</p>
+                <a href="#" class="product-link">
+                    [PRODUCT_LINK_TEXT]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-icon">[PRODUCT_4_ICON]</div>
+                <h3 class="product-name">[PRODUCT_4_NAME]</h3>
+                <p class="product-description">[PRODUCT_4_DESCRIPTION]</p>
+                <p class="product-price">[PRODUCT_4_PRICE_LABEL] <span>[PRODUCT_4_PRICE]</span>[PRODUCT_4_PRICE_PERIOD]</p>
+                <a href="#" class="product-link">
+                    [PRODUCT_LINK_TEXT]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-icon">[PRODUCT_5_ICON]</div>
+                <h3 class="product-name">[PRODUCT_5_NAME]</h3>
+                <p class="product-description">[PRODUCT_5_DESCRIPTION]</p>
+                <p class="product-price">[PRODUCT_5_PRICE_LABEL] <span>[PRODUCT_5_PRICE]</span>[PRODUCT_5_PRICE_PERIOD]</p>
+                <a href="#" class="product-link">
+                    [PRODUCT_LINK_TEXT]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-icon">[PRODUCT_6_ICON]</div>
+                <h3 class="product-name">[PRODUCT_6_NAME]</h3>
+                <p class="product-description">[PRODUCT_6_DESCRIPTION]</p>
+                <p class="product-price">[PRODUCT_6_PRICE_LABEL] <span>[PRODUCT_6_PRICE]</span>[PRODUCT_6_PRICE_PERIOD]</p>
+                <a href="#" class="product-link">
+                    [PRODUCT_LINK_TEXT]
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section>
+        <div class="section-header">
+            <span class="section-label">[USE_CASES_LABEL]</span>
+            <h2 class="section-title">[USE_CASES_TITLE]</h2>
+            <p class="section-desc">[USE_CASES_DESCRIPTION]</p>
+        </div>
+
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <span class="use-case-icon">[USE_CASE_1_ICON]</span>
+                <h3 class="use-case-title">[USE_CASE_1_TITLE]</h3>
+                <p class="use-case-desc">[USE_CASE_1_DESCRIPTION]</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">[USE_CASE_2_ICON]</span>
+                <h3 class="use-case-title">[USE_CASE_2_TITLE]</h3>
+                <p class="use-case-desc">[USE_CASE_2_DESCRIPTION]</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">[USE_CASE_3_ICON]</span>
+                <h3 class="use-case-title">[USE_CASE_3_TITLE]</h3>
+                <p class="use-case-desc">[USE_CASE_3_DESCRIPTION]</p>
+            </div>
+            <div class="use-case-card">
+                <span class="use-case-icon">[USE_CASE_4_ICON]</span>
+                <h3 class="use-case-title">[USE_CASE_4_TITLE]</h3>
+                <p class="use-case-desc">[USE_CASE_4_DESCRIPTION]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section>
+        <div class="section-header">
+            <span class="section-label">[COMPARE_LABEL]</span>
+            <h2 class="section-title">[COMPARE_TITLE]</h2>
+        </div>
+
+        <div class="comparison-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>[COMPARE_COL_FEATURE]</th>
+                        <th>[COMPARE_COL_1]</th>
+                        <th>[COMPARE_COL_2]</th>
+                        <th>[COMPARE_COL_3]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">[COMPARE_ROW_1_FEATURE]</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">[COMPARE_ROW_2_FEATURE]</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">[COMPARE_ROW_3_FEATURE]</td>
+                        <td>[COMPARE_ROW_3_VAL_1]</td>
+                        <td>[COMPARE_ROW_3_VAL_2]</td>
+                        <td>[COMPARE_ROW_3_VAL_3]</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">[COMPARE_ROW_4_FEATURE]</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">[COMPARE_ROW_5_FEATURE]</td>
+                        <td>[COMPARE_ROW_5_VAL_1]</td>
+                        <td>[COMPARE_ROW_5_VAL_2]</td>
+                        <td>[COMPARE_ROW_5_VAL_3]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Integrations -->
+    <section class="integrations-section">
+        <div class="section-header">
+            <span class="section-label">[INTEGRATIONS_LABEL]</span>
+            <h2 class="section-title">[INTEGRATIONS_TITLE]</h2>
+        </div>
+
+        <div class="integrations-marquee">
+            <div class="integrations-marquee-inner">
+                <div class="integration-logo">[INTEGRATION_1]</div>
+                <div class="integration-logo">[INTEGRATION_2]</div>
+                <div class="integration-logo">[INTEGRATION_3]</div>
+                <div class="integration-logo">[INTEGRATION_4]</div>
+                <div class="integration-logo">[INTEGRATION_5]</div>
+                <div class="integration-logo">[INTEGRATION_6]</div>
+                <div class="integration-logo">[INTEGRATION_7]</div>
+                <div class="integration-logo">[INTEGRATION_8]</div>
+            </div>
+            <div class="integrations-marquee-inner">
+                <div class="integration-logo">[INTEGRATION_1]</div>
+                <div class="integration-logo">[INTEGRATION_2]</div>
+                <div class="integration-logo">[INTEGRATION_3]</div>
+                <div class="integration-logo">[INTEGRATION_4]</div>
+                <div class="integration-logo">[INTEGRATION_5]</div>
+                <div class="integration-logo">[INTEGRATION_6]</div>
+                <div class="integration-logo">[INTEGRATION_7]</div>
+                <div class="integration-logo">[INTEGRATION_8]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial-section">
+        <div class="testimonial-container">
+            <blockquote class="testimonial-quote">[TESTIMONIAL_QUOTE]</blockquote>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                    <div class="testimonial-avatar-inner">[TESTIMONIAL_AVATAR]</div>
+                </div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">[TESTIMONIAL_NAME]</div>
+                    <div class="testimonial-role">[TESTIMONIAL_ROLE]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-orb"></div>
+        <div class="cta-content">
+            <h2 class="cta-title">[CTA_TITLE]</h2>
+            <p class="cta-description">[CTA_DESCRIPTION]</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-primary">[CTA_PRIMARY]</a>
+                <a href="#" class="cta-secondary">[CTA_SECONDARY]</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">
+            <svg viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="44" stroke="#FF1D6C" stroke-width="6"/>
+                <g class="road-dashes">
+                    <rect x="47" y="4" width="6" height="12" fill="#000" rx="2"/>
+                    <rect x="47" y="84" width="6" height="12" fill="#000" rx="2"/>
+                    <rect x="84" y="47" width="12" height="6" fill="#000" rx="2"/>
+                    <rect x="4" y="47" width="12" height="6" fill="#000" rx="2"/>
+                    <rect x="75" y="18" width="6" height="10" fill="#000" rx="2" transform="rotate(45 78 23)"/>
+                    <rect x="19" y="72" width="6" height="10" fill="#000" rx="2" transform="rotate(45 22 77)"/>
+                    <rect x="72" y="72" width="6" height="10" fill="#000" rx="2" transform="rotate(-45 75 77)"/>
+                    <rect x="22" y="18" width="6" height="10" fill="#000" rx="2" transform="rotate(-45 25 23)"/>
+                </g>
+                <path d="M50 10C27.9 10 10 27.9 10 50H90C90 27.9 72.1 10 50 10Z" fill="#F5A623"/>
+                <path d="M10 50C10 72.1 27.9 90 50 90C72.1 90 90 72.1 90 50H10Z" fill="#2979FF"/>
+                <circle cx="50" cy="50" r="14" fill="#000"/>
+            </svg>
+        </div>
+        <p>[FOOTER_TEXT]</p>
+    </footer>
+
+    <script>
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const progress = document.getElementById('scrollProgress');
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            progress.style.width = (scrollTop / scrollHeight) * 100 + '%';
+        });
+    </script>
+
+</body>
+</html>

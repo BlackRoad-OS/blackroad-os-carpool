@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[BRAND_NAME] — [PAGE_TITLE]</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --amber: #F5A623;
+            --orange: #F26522;
+            --hot-pink: #FF1D6C;
+            --magenta: #E91E63;
+            --electric-blue: #2979FF;
+            --sky-blue: #448AFF;
+            --violet: #9C27B0;
+            --deep-purple: #5E35B1;
+            
+            --gradient-brand: linear-gradient(135deg, var(--amber) 0%, var(--hot-pink) 38.2%, var(--violet) 61.8%, var(--electric-blue) 100%);
+            
+            --phi: 1.618;
+            --space-xs: 8px;
+            --space-sm: 13px;
+            --space-md: 21px;
+            --space-lg: 34px;
+            --space-xl: 55px;
+            --space-2xl: 89px;
+            
+            --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            line-height: 1.618;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== AUTH LAYOUT ========== */
+        .auth-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        /* ========== BRAND SIDE ========== */
+        .auth-brand {
+            background: rgba(255, 255, 255, 0.02);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 55px 55px;
+            animation: grid-move 30s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(55px, 55px); }
+        }
+
+        .brand-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            background: var(--gradient-brand);
+            animation: orb-float 10s ease-in-out infinite;
+        }
+
+        @keyframes orb-float {
+            0%, 100% { transform: translate(-20%, -20%) scale(1); }
+            50% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .brand-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .brand-logo .road-dashes {
+            animation: dashes-spin 8s linear infinite;
+            transform-origin: 50px 50px;
+        }
+
+        @keyframes dashes-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .brand-logo .eye-pupil {
+            animation: pupil-track 4s ease-in-out infinite;
+        }
+
+        @keyframes pupil-track {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+        }
+
+        .brand-title {
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+        }
+
+        .brand-description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .brand-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            text-align: left;
+        }
+
+        .brand-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .brand-feature-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 29, 108, 0.1);
+            border-radius: var(--space-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ========== FORM SIDE ========== */
+        .auth-form-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-2xl);
+        }
+
+        .auth-form-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .auth-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .auth-subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .auth-subtitle a {
+            color: var(--hot-pink);
+            text-decoration: none;
+            transition: color 0.2s var(--ease);
+        }
+
+        .auth-subtitle a:hover {
+            color: var(--white);
+        }
+
+        /* Form Tabs */
+        .auth-tabs {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-xl);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+            border-radius: var(--space-xs);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: var(--space-sm);
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s var(--ease);
+        }
+
+        .auth-tab:hover {
+            color: var(--white);
+        }
+
+        .auth-tab.active {
+            background: var(--gradient-brand);
+            color: var(--white);
+        }
+
+        /* Form */
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-input {
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--space-xs);
+            color: var(--white);
+            font-size: 15px;
+            outline: none;
+            transition: all 0.2s var(--ease);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-input:focus {
+            border-color: var(--hot-pink);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-input-wrapper {
+            position: relative;
+        }
+
+        .form-input-icon {
+            position: absolute;
+            right: var(--space-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: color 0.2s var(--ease);
+        }
+
+        .form-input-icon:hover {
+            color: var(--white);
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+        }
+
+        .form-checkbox input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--hot-pink);
+        }
+
+        .form-link {
+            font-size: 13px;
+            color: var(--hot-pink);
+            text-decoration: none;
+            transition: color 0.2s var(--ease);
+        }
+
+        .form-link:hover {
+            color: var(--white);
+        }
+
+        .form-submit {
+            padding: var(--space-md);
+            background: var(--gradient-brand);
+            border: none;
+            border-radius: var(--space-xs);
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            margin-top: var(--space-sm);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 29, 108, 0.3);
+        }
+
+        /* Divider */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+
+        .auth-divider-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .auth-divider-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--space-xs);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            transition: all 0.2s var(--ease);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .social-btn-icon {
+            font-size: 18px;
+        }
+
+        /* Terms */
+        .auth-terms {
+            margin-top: var(--space-lg);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .auth-terms a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.2s var(--ease);
+        }
+
+        .auth-terms a:hover {
+            color: var(--white);
+        }
+
+        /* Back Link */
+        .back-link {
+            position: absolute;
+            top: var(--space-lg);
+            left: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s var(--ease);
+        }
+
+        .back-link:hover {
+            color: var(--white);
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .auth-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-brand {
+                display: none;
+            }
+
+            .auth-form-side {
+                padding: var(--space-xl) var(--space-lg);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .social-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-layout">
+        <!-- Brand Side -->
+        <div class="auth-brand">
+            <div class="brand-grid"></div>
+            <div class="brand-orb"></div>
+
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="50" r="44" stroke="#FF1D6C" stroke-width="6"/>
+                        <g class="road-dashes">
+                            <rect x="47" y="4" width="6" height="12" fill="#000" rx="2"/>
+                            <rect x="47" y="84" width="6" height="12" fill="#000" rx="2"/>
+                            <rect x="84" y="47" width="12" height="6" fill="#000" rx="2"/>
+                            <rect x="4" y="47" width="12" height="6" fill="#000" rx="2"/>
+                            <rect x="75" y="18" width="6" height="10" fill="#000" rx="2" transform="rotate(45 78 23)"/>
+                            <rect x="19" y="72" width="6" height="10" fill="#000" rx="2" transform="rotate(45 22 77)"/>
+                            <rect x="72" y="72" width="6" height="10" fill="#000" rx="2" transform="rotate(-45 75 77)"/>
+                            <rect x="22" y="18" width="6" height="10" fill="#000" rx="2" transform="rotate(-45 25 23)"/>
+                        </g>
+                        <path d="M50 10C27.9 10 10 27.9 10 50H90C90 27.9 72.1 10 50 10Z" fill="#F5A623"/>
+                        <path d="M10 50C10 72.1 27.9 90 50 90C72.1 90 90 72.1 90 50H10Z" fill="#2979FF"/>
+                        <circle cx="50" cy="50" r="14" fill="#000"/>
+                        <circle cx="50" cy="50" r="6" fill="#FF1D6C" class="eye-pupil"/>
+                    </svg>
+                </div>
+
+                <h1 class="brand-title">[BRAND_TITLE]</h1>
+                <p class="brand-description">[BRAND_DESCRIPTION]</p>
+
+                <div class="brand-features">
+                    <div class="brand-feature">
+                        <div class="brand-feature-icon">[FEATURE_1_ICON]</div>
+                        <span>[FEATURE_1_TEXT]</span>
+                    </div>
+                    <div class="brand-feature">
+                        <div class="brand-feature-icon">[FEATURE_2_ICON]</div>
+                        <span>[FEATURE_2_TEXT]</span>
+                    </div>
+                    <div class="brand-feature">
+                        <div class="brand-feature-icon">[FEATURE_3_ICON]</div>
+                        <span>[FEATURE_3_TEXT]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Side -->
+        <div class="auth-form-side">
+            <a href="#" class="back-link">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                [BACK_LINK]
+            </a>
+
+            <div class="auth-form-container">
+                <div class="auth-header">
+                    <h2 class="auth-title">[AUTH_TITLE]</h2>
+                    <p class="auth-subtitle">[AUTH_SUBTITLE] <a href="#">[AUTH_SUBTITLE_LINK]</a></p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active">[TAB_LOGIN]</button>
+                    <button class="auth-tab">[TAB_SIGNUP]</button>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">[LABEL_EMAIL]</label>
+                        <input type="email" class="form-input" placeholder="[PLACEHOLDER_EMAIL]">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">[LABEL_PASSWORD]</label>
+                        <div class="form-input-wrapper">
+                            <input type="password" class="form-input" placeholder="[PLACEHOLDER_PASSWORD]" style="padding-right: 48px;">
+                            <span class="form-input-icon">👁️</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-checkbox">
+                            <input type="checkbox">
+                            [REMEMBER_ME]
+                        </label>
+                        <a href="#" class="form-link">[FORGOT_PASSWORD]</a>
+                    </div>
+
+                    <button type="submit" class="form-submit">[SUBMIT_LOGIN]</button>
+                </form>
+
+                <!-- Signup Form (hidden by default) -->
+                <form class="auth-form" id="signupForm" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">[LABEL_FULLNAME]</label>
+                        <input type="text" class="form-input" placeholder="[PLACEHOLDER_FULLNAME]">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">[LABEL_EMAIL]</label>
+                        <input type="email" class="form-input" placeholder="[PLACEHOLDER_EMAIL]">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">[LABEL_PASSWORD]</label>
+                        <div class="form-input-wrapper">
+                            <input type="password" class="form-input" placeholder="[PLACEHOLDER_CREATE_PASSWORD]" style="padding-right: 48px;">
+                            <span class="form-input-icon">👁️</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">[LABEL_CONFIRM_PASSWORD]</label>
+                        <input type="password" class="form-input" placeholder="[PLACEHOLDER_CONFIRM_PASSWORD]">
+                    </div>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox">
+                        [AGREE_TERMS] <a href="#" class="form-link">[TERMS_LINK]</a>
+                    </label>
+
+                    <button type="submit" class="form-submit">[SUBMIT_SIGNUP]</button>
+                </form>
+
+                <!-- Divider -->
+                <div class="auth-divider">
+                    <div class="auth-divider-line"></div>
+                    <span class="auth-divider-text">[DIVIDER_TEXT]</span>
+                    <div class="auth-divider-line"></div>
+                </div>
+
+                <!-- Social Buttons -->
+                <div class="social-buttons">
+                    <button class="social-btn">
+                        <span class="social-btn-icon">[SOCIAL_1_ICON]</span>
+                        [SOCIAL_1_TEXT]
+                    </button>
+                    <button class="social-btn">
+                        <span class="social-btn-icon">[SOCIAL_2_ICON]</span>
+                        [SOCIAL_2_TEXT]
+                    </button>
+                </div>
+
+                <!-- Terms -->
+                <p class="auth-terms">
+                    [TERMS_TEXT] <a href="#">[TERMS_LINK_1]</a> [TERMS_AND] <a href="#">[TERMS_LINK_2]</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching
+        const tabs = document.querySelectorAll('.auth-tab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                if (index === 0) {
+                    loginForm.style.display = 'flex';
+                    signupForm.style.display = 'none';
+                } else {
+                    loginForm.style.display = 'none';
+                    signupForm.style.display = 'flex';
+                }
+            });
+        });
+
+        // Password Toggle
+        document.querySelectorAll('.form-input-icon').forEach(icon => {
+            icon.addEventListener('click', () => {
+                const input = icon.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.textContent = '🙈';
+                } else {
+                    input.type = 'password';
+                    icon.textContent = '👁️';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
