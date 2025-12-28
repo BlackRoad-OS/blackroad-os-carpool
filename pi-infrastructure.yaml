@@ -3,8 +3,10 @@
 
 pis:
   lucidia:
+    hostname: lucidia
     ip: 192.168.4.38
     role: primary
+    webhook_port: 9001
     ports:
       start: 3000
       end: 3100
@@ -39,8 +41,10 @@ pis:
         repo: blackroad-os-brand
 
   aria:
-    ip: 192.168.4.X
-    role: secondary
+    hostname: aria
+    ip: 192.168.4.64
+    role: sim
+    webhook_port: 9003
     ports:
       start: 3100
       end: 3200
@@ -78,8 +82,10 @@ pis:
         repo: blackroad-os-ideas
 
   alice:
-    ip: 192.168.4.X
-    role: tertiary
+    hostname: alice
+    ip: 192.168.4.49
+    role: ops
+    webhook_port: 9002
     ports:
       start: 3200
       end: 3300
@@ -140,3 +146,23 @@ global:
     org: BlackRoad-OS
     deploy_on_push: true
     branch: main
+
+  octavia:
+    hostname: octavia
+    ip: 192.168.4.74
+    role: holo
+    webhook_port: 9004
+    ports:
+      start: 3300
+      end: 3400
+    domains: []
+
+  shellfish:
+    hostname: shellfish
+    ip: TBD
+    role: backup
+    webhook_port: 9005
+    ports:
+      start: 3400
+      end: 3500
+    domains: []
