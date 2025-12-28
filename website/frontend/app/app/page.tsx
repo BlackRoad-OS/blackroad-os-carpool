@@ -1,20 +1,16 @@
-import { auth, UserButton } from '@clerk/nextjs'
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Dashboard — CarPool',
-  description: 'CarPool application dashboard',
-}
+import { useUser, UserButton } from '@clerk/nextjs'
 
-export default async function DashboardPage() {
-  const { userId } = auth()
+export default function DashboardPage() {
+  const { user, isLoaded } = useUser()
 
-  // Mock user data for now (we'll connect to real API later)
-  const user = {
-    id: userId,
-    username: 'blackboxprogramming',
-    firstName: 'Alexa',
-    emailAddresses: [{ emailAddress: 'amundsonalexa@gmail.com' }]
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-2xl">Loading...</div>
+      </div>
+    )
   }
 
   return (
