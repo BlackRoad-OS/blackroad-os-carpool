@@ -1,0 +1,65 @@
+name: Deploy to lucidia Pi
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js (if needed)
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Build Application
+        run: |
+          if [ -f "package.json" ]; then
+            npm install --legacy-peer-deps
+            npm run build
+          fi
+
+      - name: Deploy to lucidia
+        env:
+          PI_HOST: ${{ secrets.LUCIDIA_HOST }}
+          PI_USER: ${{ secrets.PI_USER }}
+          PI_SSH_KEY: ${{ secrets.PI_SSH_KEY }}
+        run: |
+          # Setup SSH
+          mkdir -p ~/.ssh
+          echo "$PI_SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $PI_HOST >> ~/.ssh/known_hosts
+
+          # Create deployment package
+          tar -czf deploy.tar.gz .
+
+          # Upload to Pi
+          scp deploy.tar.gz $PI_USER@$PI_HOST:~/deploys/blackroad-os-carpool.tar.gz
+
+          # Deploy on Pi
+          ssh $PI_USER@$PI_HOST << 'ENDSSH'
+            cd ~/deploys
+            mkdir -p blackroad-os-carpool
+            tar -xzf blackroad-os-carpool.tar.gz -C blackroad-os-carpool
+            cd blackroad-os-carpool
+
+            # Create/update Docker container
+            docker build -t blackroad-os-carpool:latest .
+            docker stop blackroad-os-carpool || true
+            docker rm blackroad-os-carpool || true
+            docker run -d --name blackroad-os-carpool \
+              -p 3002:3000 \
+              --restart unless-stopped \
+              blackroad-os-carpool:latest
+
+            echo "Deployed blackroad-os-carpool to port 3002"
+ENDSSH
+
+          echo "✅ Deployment complete to lucidia:3002"
+

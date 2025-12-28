@@ -1,0 +1,142 @@
+# BlackRoad Pi Infrastructure Configuration
+# Distributes all domains across Raspberry Pis
+
+pis:
+  lucidia:
+    ip: 192.168.4.38
+    role: primary
+    ports:
+      start: 3000
+      end: 3100
+    domains:
+      # Main BlackRoad domains
+      - domain: blackroad.io
+        port: 3000
+        repo: blackroad-os-web
+      - domain: www.blackroad.io
+        port: 3000
+        repo: blackroad-os-web
+      - domain: carpool.blackroad.io
+        port: 3002
+        repo: blackroad-os-carpool
+      - domain: os.blackroad.io
+        port: 8081
+        repo: blackroad-os-carpool
+      - domain: app.blackroad.io
+        port: 3003
+        repo: blackroad-os-carpool
+      - domain: home.blackroad.io
+        port: 3004
+        repo: blackroad-os-home
+      - domain: demo.blackroad.io
+        port: 3005
+        repo: blackroad-os-demo
+      - domain: docs.blackroad.io
+        port: 3006
+        repo: blackroad-os-docs
+      - domain: brand.blackroad.io
+        port: 3007
+        repo: blackroad-os-brand
+
+  aria:
+    ip: 192.168.4.X
+    role: secondary
+    ports:
+      start: 3100
+      end: 3200
+    domains:
+      # Pack subdomains
+      - domain: creator-studio.blackroad.io
+        port: 3100
+        repo: blackroad-os-pack-creator-studio
+      - domain: creator.blackroad.io
+        port: 3101
+        repo: blackroad-os-pack-creator-studio
+      - domain: dashboard.blackroad.io
+        port: 3102
+        repo: blackroad-os-dashboard
+      - domain: devops.blackroad.io
+        port: 3103
+        repo: blackroad-os-pack-infra-devops
+      - domain: education.blackroad.io
+        port: 3104
+        repo: blackroad-os-pack-education
+      - domain: finance.blackroad.io
+        port: 3105
+        repo: blackroad-os-pack-finance
+      - domain: legal.blackroad.io
+        port: 3106
+        repo: blackroad-os-pack-legal
+      - domain: research-lab.blackroad.io
+        port: 3107
+        repo: blackroad-os-pack-research-lab
+      - domain: studio.blackroad.io
+        port: 3108
+        repo: blackroad-os-pack-creator-studio
+      - domain: ideas.blackroad.io
+        port: 3109
+        repo: blackroad-os-ideas
+
+  alice:
+    ip: 192.168.4.X
+    role: tertiary
+    ports:
+      start: 3200
+      end: 3300
+    domains:
+      # Systems subdomains
+      - domain: core.blackroad.systems
+        port: 3200
+        repo: blackroad-os-core
+      - domain: agents.blackroad.systems
+        port: 3201
+        repo: blackroad-os-agents
+      - domain: operator.blackroad.systems
+        port: 3202
+        repo: blackroad-os-operator
+      - domain: master.blackroad.systems
+        port: 3203
+        repo: blackroad-os-master
+      - domain: beacon.blackroad.systems
+        port: 3204
+        repo: blackroad-os-beacon
+      - domain: archive.blackroad.systems
+        port: 3205
+        repo: blackroad-os-archive
+      - domain: prism.blackroad.systems
+        port: 3206
+        repo: blackroad-os-prism-console
+      - domain: research.blackroad.systems
+        port: 3207
+        repo: blackroad-os-research
+
+      # Additional domains
+      - domain: blackroad.network
+        port: 3210
+        repo: blackroad-os-web
+      - domain: blackroadai.com
+        port: 3211
+        repo: blackroad-os-web
+      - domain: www.blackroadai.com
+        port: 3211
+        repo: blackroad-os-web
+      - domain: blackroadqi.com
+        port: 3212
+        repo: blackroad-os-web
+      - domain: lucidia.earth
+        port: 3213
+        repo: lucidia-earth
+      - domain: lucidia.studio
+        port: 3214
+        repo: lucidia-earth
+
+# Global configuration
+global:
+  public_ip: 104.28.215.98
+  caddy:
+    auto_https: true
+    email: amundsonalexa@gmail.com
+  github:
+    org: BlackRoad-OS
+    deploy_on_push: true
+    branch: main
