@@ -52,8 +52,10 @@ htmlcov/
 credentials.json
 
 # Corporate documents - NEVER commit!
-/corporate/
-corporate/
+/corporate/**/*.pdf
+/corporate/**/
+!corporate/
+!corporate/README.md
 
 # Attorney-client privileged
 /legal/
