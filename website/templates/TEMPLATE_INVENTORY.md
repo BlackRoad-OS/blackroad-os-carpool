@@ -1,11 +1,33 @@
 # BlackRoad Template Inventory
 
 **Last Updated:** December 28, 2024
-**Total Templates:** 22 files (793KB total)
+**Total Templates:** 23 files (875KB total)
 
 ---
 
-## 📄 Website Page Templates (NEW!)
+## 🌌 BlackRoad OS Landing Page (NEW!)
+
+**Purpose:** Main BlackRoad OS ecosystem landing page for `os.blackroad.io`
+
+| File | Size | Purpose | Integration |
+|------|------|---------|-------------|
+| **blackroad-os-landing.html** | 82KB | Complete AI ecosystem showcase | Integrates with carpool.blackroad.io |
+
+**Features:**
+- Animated grid background
+- Floating color orbs
+- Full ecosystem overview (CarPool, Lucidia, RoadChain, RoadCoin)
+- Modern glass morphism design
+- JetBrains Mono typography
+- Golden ratio spacing
+- Gradient brand colors
+
+**Domain:** `os.blackroad.io` (main company/ecosystem landing)
+**Integration:** Links to `carpool.blackroad.io`, `lucidia.earth`, `roadchain.io`, `roadcoin.io`
+
+---
+
+## 📄 Website Page Templates
 
 Complete production-ready pages with BlackRoad design system:
 
