@@ -1,4 +1,4 @@
-import { currentUser, UserButton } from '@clerk/nextjs'
+import { auth, UserButton } from '@clerk/nextjs'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -7,7 +7,15 @@ export const metadata: Metadata = {
 }
 
 export default async function DashboardPage() {
-  const user = await currentUser()
+  const { userId } = auth()
+
+  // Mock user data for now (we'll connect to real API later)
+  const user = {
+    id: userId,
+    username: 'blackboxprogramming',
+    firstName: 'Alexa',
+    emailAddresses: [{ emailAddress: 'amundsonalexa@gmail.com' }]
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">
