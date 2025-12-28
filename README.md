@@ -184,10 +184,23 @@ npm run dev  # or: uvicorn main:app --reload
 
 ## Documentation
 
-- **[Vision Document](./BLACKROAD_IO_VISION.md)** - Complete product vision and strategy
-- **[API Reference](./docs/API.md)** - REST API documentation
-- **[Model Routing](./docs/ROUTING.md)** - How Lucidia makes routing decisions
-- **[Local Models](./docs/LOCAL_MODELS.md)** - Fine-tuning and deployment guide
+**Complete documentation suite available in [`/docs`](./docs/):**
+
+| Doc | Purpose | Read When |
+|-----|---------|-----------|
+| [00-MASTER-INDEX](./docs/00-MASTER-INDEX.md) | Documentation overview & quick reference | Starting any work |
+| [01-VISION](./docs/01-VISION.md) | Why BlackRoad exists, core thesis, positioning | Onboarding, strategic decisions |
+| [02-ARCHITECTURE](./docs/02-ARCHITECTURE.md) | System design, service boundaries, data flow | Designing features, debugging |
+| [03-DATABASE-SCHEMA](./docs/03-DATABASE-SCHEMA.md) | All tables, relationships, indexes | Writing queries, migrations |
+| [04-API-CONTRACTS](./docs/04-API-CONTRACTS.md) | Every endpoint, request/response shapes | Building frontend/backend |
+| [05-USER-FLOWS](./docs/05-USER-FLOWS.md) | Step-by-step user journeys | Designing UX, testing |
+| [06-COMPONENTS](./docs/06-COMPONENTS.md) | Every UI component needed | Building frontend |
+| [07-INTEGRATIONS](./docs/07-INTEGRATIONS.md) | How each provider/tool connects | Adding new integrations |
+| [08-DEPLOYMENT](./docs/08-DEPLOYMENT.md) | How to deploy each service | DevOps, releases |
+| [09-ROADMAP](./docs/09-ROADMAP.md) | Phased timeline with milestones | Planning, prioritization |
+| [10-GLOSSARY](./docs/10-GLOSSARY.md) | Terms and definitions | Avoiding confusion |
+| [ARCHITECTURE](./docs/ARCHITECTURE.md) | Technical architecture deep-dive | System design work |
+| [BLACKROAD_IO_VISION](./BLACKROAD_IO_VISION.md) | Original vision document | Product strategy
 
 ---
 
