@@ -1,3 +1,4 @@
+import { SignIn } from '@clerk/nextjs'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -7,10 +8,24 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <iframe
-      src="/templates/blackroad-template-09-auth.html"
-      className="w-full h-screen border-0"
-      title="Login"
-    />
+    <div className="min-h-screen flex items-center justify-center bg-black">
+      <SignIn
+        appearance={{
+          elements: {
+            rootBox: 'mx-auto',
+            card: 'bg-gray-900 border border-gray-800',
+            headerTitle: 'text-white',
+            headerSubtitle: 'text-gray-400',
+            socialButtonsBlockButton: 'border-gray-700 hover:bg-gray-800',
+            formButtonPrimary: 'bg-gradient-to-r from-amber-500 via-pink-500 to-blue-500',
+            footerActionLink: 'text-pink-500 hover:text-pink-400',
+          },
+        }}
+        routing="path"
+        path="/auth/login"
+        signUpUrl="/auth/signup"
+        redirectUrl="/app"
+      />
+    </div>
   )
 }
