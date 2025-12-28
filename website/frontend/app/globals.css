@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --amber: #F5A623;
+  --orange: #F26522;
+  --hot-pink: #FF1D6C;
+  --magenta: #E91E63;
+  --electric-blue: #2979FF;
+  --sky-blue: #448AFF;
+  --violet: #9C27B0;
+  --deep-purple: #5E35B1;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-black text-white;
+  }
+}
