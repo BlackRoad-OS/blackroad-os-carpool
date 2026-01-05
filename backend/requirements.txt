@@ -11,7 +11,7 @@ alembic==1.13.1
 pgvector==0.2.5
 
 # AI Model SDKs
-openai==1.10.0
+openai==2.14.0
 anthropic==0.18.0
 google-generativeai==0.3.2
 
