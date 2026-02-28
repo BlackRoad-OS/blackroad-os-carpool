@@ -86,6 +86,10 @@ if __name__ == "__main__":
     print(f"✅ Generated architecture spec for {structure['name']}")
 PYTHON
 
+          # Render visual diagram using Canva CLI from the generated specification
+          canva render \
+            --input docs/visual/architecture-spec.json \
+            --output docs/visual/architecture-diagram.png || echo "⚠️ Canva CLI render failed; architecture spec JSON was still generated."
       - name: Create visual documentation index
         run: |
           cat > docs/visual/README.md << 'DOCS'
