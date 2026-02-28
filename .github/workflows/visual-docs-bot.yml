@@ -34,6 +34,10 @@ jobs:
 
           # Create docs directory
           mkdir -p docs/visual
+          if [ ! -d docs/visual ]; then
+            echo "❌ Failed to create docs/visual directory"
+            exit 1
+          fi
 
           # Generate diagrams from codebase structure
           python3 << 'PYTHON'
