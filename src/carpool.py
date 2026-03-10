@@ -232,7 +232,7 @@ class CarpoolPlatform:
         riders = json.loads(row[0])
         route_km = row[1]
         
-        co2_saved = (len(riders) - 1) * route_km * 0.21 if len(riders) > 0 else 0
+        co2_saved = len(riders) * route_km * 0.21 if riders else 0
         
         cursor.execute("UPDATE rides SET status = 'completed' WHERE id = ?", (ride_id,))
         conn.commit()

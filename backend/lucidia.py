@@ -12,7 +12,12 @@ about which AI to use for each task.
 from typing import Dict, List, Optional, Any
 from enum import Enum
 from pydantic import BaseModel
-import tiktoken
+
+try:
+    import tiktoken
+    _TIKTOKEN_AVAILABLE = True
+except Exception:
+    _TIKTOKEN_AVAILABLE = False
 
 
 class TaskComplexity(str, Enum):
@@ -90,7 +95,12 @@ class LucidiaRouter:
     """
 
     def __init__(self):
-        self.tokenizer = tiktoken.get_encoding("cl100k_base")
+        self.tokenizer = None
+        if _TIKTOKEN_AVAILABLE:
+            try:
+                self.tokenizer = tiktoken.get_encoding("cl100k_base")
+            except Exception:
+                pass
 
         # Model capability database
         self.model_capabilities: Dict[str, ModelCapability] = {
@@ -176,11 +186,11 @@ class LucidiaRouter:
 
         Returns TaskAnalysis with complexity, type, and requirements.
         """
-        # Count tokens
-        tokens = len(self.tokenizer.encode(message))
+        # Count tokens (fallback to char-based estimate when tokenizer unavailable)
+        tokens = self._count_tokens(message)
         if conversation_history:
             for msg in conversation_history:
-                tokens += len(self.tokenizer.encode(msg.get("content", "")))
+                tokens += self._count_tokens(msg.get("content", ""))
 
         # Detect task type (simple keyword matching for MVP)
         task_type = self._classify_task_type(message)
@@ -262,6 +272,13 @@ class LucidiaRouter:
             estimated_cost=task_analysis.estimated_tokens * selected_cap.cost_per_1k_tokens / 1000,
             confidence_score=selected_score
         )
+
+    def _count_tokens(self, text: str) -> int:
+        """Count tokens, falling back to char-based estimate when offline."""
+        if self.tokenizer is not None:
+            return len(self.tokenizer.encode(text))
+        # Rough estimate: ~4 characters per token (common heuristic)
+        return max(1, len(text) // 4)
 
     def _classify_task_type(self, message: str) -> TaskType:
         """Classify task type from message content"""
