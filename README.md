@@ -218,7 +218,7 @@ Key areas:
 
 ## License
 
-MIT License - See [LICENSE](./LICENSE) for details
+BlackRoad Proprietary License - See [LICENSE](./LICENSE) for details
 
 ---
 
